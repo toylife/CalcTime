@@ -1,5 +1,24 @@
 #include <stdio.h>
 
+
+void PrintDuration(int duration) {
+    printf("%d时%d分\n\n", duration / 60, duration % 60);
+}
+int Duration(int hour1, int minute1, int hour2, int minute2) {
+    int t1 = hour1 * 60 + minute1;
+    int t2 = hour2 * 60 + minute2;
+    t1 = t2 - t1;
+
+    if (t1 > 0) {
+        PrintDuration(t1);
+        return t1;
+    } else {
+        t1 = -t1;
+        PrintDuration(t1);
+        return t1;
+    }
+}
+
 int main()
 {
     int hour1, minute1;
@@ -9,35 +28,20 @@ int main()
 // 输入第1个时间段
     scanf("%d %d", &hour1, &minute1);
     scanf("%d %d", &hour2, &minute2);
+    printf("第1次：");
+    int t1 = Duration(hour1, minute1, hour2, minute2);
 
-    int t1 = hour1 * 60 + minute1;
-    int t2 = hour2 * 60 + minute2;
-    int t_1 = t2 - t1;
-
-    if (t_1 > 0) {
-        printf("时间差是%d时%d分\n", t_1 / 60, t_1 % 60);
-    } else {
-        t_1 = -t_1;
-        printf("时间差是%d时%d分\n", t_1 / 60, t_1 % 60);
-    }
 
 // 输入第2个时间段
     scanf("%d %d", &hour3, &minute3);
     scanf("%d %d", &hour4, &minute4);
+    printf("第2次：");
+    int t2 = Duration(hour3, minute3, hour4, minute4);
 
-    int t3 = hour3 * 60 + minute3;
-    int t4 = hour4 * 60 + minute4;
-    int t_2 = t4 - t3;
-
-    if (t_2 > 0) {
-        printf("时间差是%d时%d分\n", t_2 / 60, t_2 % 60);
-    } else {
-        t_2 = -t_2;
-        printf("时间差是%d时%d分\n", t_2 / 60, t_2 % 60);
-    }
 
 // 打印总时长
-    t_2 = t_1 + t_2;
-    printf("今日工作时长：\n%d时%d分\n加油！\n", t_2 / 60, t_2 % 60);
+    t2 = t1 + t2;
+    printf("总计：");
+    PrintDuration(t2);
     return 0;
 }
