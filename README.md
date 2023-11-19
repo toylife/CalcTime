@@ -1,2 +1,2 @@
 # CalcTime
-Practice
+To calculate how long you have spend.

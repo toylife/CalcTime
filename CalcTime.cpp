@@ -1,23 +1,8 @@
 #include <stdio.h>
 
+void PrintDuration(int);
+int Duration(int, int, int, int);
 
-void PrintDuration(int duration) {
-    printf("%d时%d分\n\n", duration / 60, duration % 60);
-}
-int Duration(int hour1, int minute1, int hour2, int minute2) {
-    int t1 = hour1 * 60 + minute1;
-    int t2 = hour2 * 60 + minute2;
-    t1 = t2 - t1;
-
-    if (t1 > 0) {
-        PrintDuration(t1);
-        return t1;
-    } else {
-        t1 = -t1;
-        PrintDuration(t1);
-        return t1;
-    }
-}
 
 int main()
 {
@@ -44,4 +29,23 @@ int main()
     printf("总计：");
     PrintDuration(t2);
     return 0;
+}
+
+
+void PrintDuration(int duration) {
+    printf("%d时%d分\n\n", duration / 60, duration % 60);
+}
+int Duration(int hour1, int minute1, int hour2, int minute2) {
+    int t1 = hour1 * 60 + minute1;
+    int t2 = hour2 * 60 + minute2;
+    t1 = t2 - t1;
+
+    if (t1 > 0) {
+        PrintDuration(t1);
+        return t1;
+    } else {
+        t1 = -t1;
+        PrintDuration(t1);
+        return t1;
+    }
 }
