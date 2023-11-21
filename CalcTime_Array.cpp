@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <math.h>
 
 int main()
 {
@@ -34,13 +35,7 @@ int main()
         // 计算两次打卡之间的时间差
         int diff1 = times[i].hour * 60 + times[i].minute;
         int diff2 = times[i - 1].hour * 60 + times[i - 1].minute;
-        diff1 = diff2 - diff1;
-        if (diff1 < 0)
-        {
-            total_time += -diff1;
-        }
-        else
-            total_time += diff1;
+        total_time += fabs(diff2 - diff1);
     }
 
     // 输出工作时间总数
