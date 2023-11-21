@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <math.h>
 
 void PrintDuration(int);
 int Duration(int, int, int, int);
@@ -42,14 +43,7 @@ void PrintDuration(int duration) {
 int Duration(int hour1, int minute1, int hour2, int minute2) {
     int t1 = hour1 * 60 + minute1;
     int t2 = hour2 * 60 + minute2;
-    t1 = t2 - t1;
 
-    if (t1 > 0) {
-        PrintDuration(t1);
-        return t1;
-    } else {
-        t1 = -t1;
-        PrintDuration(t1);
-        return t1;
-    }
+    PrintDuration(fabs(t2 - t1));
+    return fabs(t2 - t1);
 }
