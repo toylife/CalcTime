@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <math.h>
+#include <string.h>
 
 int main()
 {
@@ -10,53 +11,46 @@ int main()
         int minute;
     } times[8];
 
+    char temp[4];
+    int total_time = 0;
     int punch_no = 0;
-    int OnlyEnter = 1;
 
-    for (int i = 0; i < 8; i++)
+    // 输入打卡时间
+    for (int i = 0; i < 8; ++i)
     {
         printf("第%d次打卡(HH mm): ", i + 1);
-        // scanf("%d", &times[i].hour);
-        int input = getchar();
-        // 检查是否只有回车输入
-        if (input != '\n')
+        scanf("%4s", temp);
+        if (temp[0] == '0')
         {
-            OnlyEnter = 0;
-            times[i].hour = input - '0'; // 将字符转换为数字
-            scanf(" %d", &times[i].minute);
+            times[i].hour = (temp[1] - '0');
+            times[i].minute = (temp[2] - '0') * 10 + (temp[3] - '0');
             punch_no++;
-
+        }
+        else if (temp[0] == '1' || temp[0] == '2')
+        {
+            times[i].hour = (temp[0] - '0') * 10 + (temp[1] - '0');
+            times[i].minute = (temp[2] - '0') * 10 + (temp[3] - '0');
+            punch_no++;
         }
         else
         {
-            printf("------\n");
+            printf("OK.\n---------\n");
             break;
         }
-
-        // 清除输入缓冲区中的多余字符
-        while (getchar() != '\n')
-            continue;
     }
-    if (OnlyEnter == 1)
+    // 计算工作时间总数
+
+    for (int i = 1; i < punch_no; i += 2)
     {
-        printf("已取消");
+        // 计算两次打卡之间的时间差
+        int diff1 = times[i].hour * 60 + times[i].minute;
+        int diff2 = times[i - 1].hour * 60 + times[i - 1].minute;
+        total_time += fabs(diff2 - diff1);
     }
-    else
-    {
-        // 计算工作时间总数
-        int total_time = 0;
 
-        for (int i = 1; i < punch_no; i += 2)
-        {
-            // 计算两次打卡之间的时间差
-            int diff1 = times[i].hour * 60 + times[i].minute;
-            int diff2 = times[i - 1].hour * 60 + times[i - 1].minute;
-            total_time += fabs(diff2 - diff1);
-        }
+    // 输出工作时间总数
+    printf("打卡次数：\t%d 次\n", punch_no);
+    printf("工作时间：\t%d 小时 %d 分钟\n", total_time / 60, total_time % 60);
 
-        // 输出工作时间总数
-        printf("打卡次数：\t%d 次\n", punch_no);
-        printf("工作时间：\t%d 小时 %d 分钟\n", total_time / 60, total_time % 60);
-    }
     return 0;
 }
