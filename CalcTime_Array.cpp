@@ -50,7 +50,7 @@ int main()
 
     // 输出工作时间总数
     printf("打卡次数：\t%d 次\n", punch_no);
-    printf("工作时间：\t%d 小时 %d 分钟\n", total_time / 60, total_time % 60);
+    printf("工作时间：\t%d 时 %d 分\n", total_time / 60, total_time % 60);
 
     return 0;
 }
