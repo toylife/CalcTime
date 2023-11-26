@@ -1,2 +1,2 @@
 # CalcTime
-To calculate how long you have spend.
+To calculate how long you have spent.
